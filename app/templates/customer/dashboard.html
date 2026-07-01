@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4" data-aos="fade-up">
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <div class="p-5 rounded-4 bg-dark text-white shadow-lg mb-5">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <h1 class="display-5 fw-bold">
+                    Hungry, {{ current_user.first_name }}?
+                </h1>
+
+                <p class="fs-5 text-light mt-3">
+                    Discover delicious meals from the best restaurants in your city.
+                </p>
+
+                <div class="input-group mt-4">
+
+                    <input
+                        type="text"
+                        class="form-control border-0 py-3"
+                        placeholder="Search food, restaurant..."
+                    >
+
+                    <button class="btn btn-warning px-4">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 text-end">
+
+                <a href="{{ url_for('customer.view_cart') }}"
+                   class="btn btn-warning btn-lg">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Cart ({{ cart_count }})
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= RESTAURANTS ================= -->
+
+    <h2 class="fw-bold mb-4 ">
+
+        Restaurants
+
+    </h2>
+
+    <div class="row">
+
+        {% for restaurant in restaurants %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card food-card h-100 shadow">
+
+                {% if restaurant.image_url %}
+
+                <img
+                    src="{{ restaurant.image_url }}"
+                    class="card-img-top food-image"
+                    alt="{{ restaurant.name }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="https://via.placeholder.com/500x300?text=Restaurant"
+                    class="card-img-top food-image"
+                    alt="Restaurant"
+                >
+
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold">
+
+                        {{ restaurant.name }}
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        {{ restaurant.description }}
+
+                    </p>
+
+                    <span class="badge bg-success">
+
+                        ⭐ {{ restaurant.rating }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="alert alert-warning">
+
+                No restaurants available.
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- ================= FOOD MENU ================= -->
+
+    <h2 class="fw-bold mt-5 mb-4 ">
+
+        Available Food
+
+    </h2>
+
+    <div class="row">
+
+        {% for food in foods %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card food-card h-100 shadow">
+
+                {% if food.image_url %}
+
+                <img
+                    src="{{ food.image_url }}"
+                    class="card-img-top food-image"
+                    alt="{{ food.name }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="https://via.placeholder.com/500x300?text=Food"
+                    class="card-img-top food-image"
+                    alt="Food"
+                >
+
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold">
+
+                        {{ food.name }}
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        {{ food.description }}
+
+                    </p>
+
+                    <h5 class="text-warning fw-bold">
+
+                        Rs. {{ food.price }}
+
+                    </h5>
+
+                    {% if food.restaurant %}
+
+                    <small class="text-secondary">
+
+                        Restaurant:
+                        {{ food.restaurant.name }}
+
+                    </small>
+
+                    {% endif %}
+
+                    <form
+                        action="{{ url_for('customer.add_to_cart', food_id=food.id) }}"
+                        method="POST"
+                        class="mt-3"
+                    >
+
+                        <button
+                            class="btn btn-warning w-100"
+                            type="submit"
+                        >
+
+                            <i class="fa-solid fa-cart-plus"></i>
+
+                            Add to Cart
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="alert alert-info">
+
+                No food items available.
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <div class="row mt-5">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card bg-dark text-white shadow">
+
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-truck-fast fa-3x text-warning mb-3"></i>
+
+                    <h5>Fast Delivery</h5>
+
+                    <p>
+                        Get your favorite meals delivered quickly.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card bg-dark text-white shadow">
+
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-utensils fa-3x text-warning mb-3"></i>
+
+                    <h5>Fresh Food</h5>
+
+                    <p>
+                        Prepared by top-rated restaurants.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card bg-dark text-white shadow">
+
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-star fa-3x text-warning mb-3"></i>
+
+                    <h5>Top Rated</h5>
+
+                    <p>
+                        Highly rated restaurants and delicious meals.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

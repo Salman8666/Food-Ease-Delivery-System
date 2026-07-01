@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="text-center mb-4">
+            <h2 class="auth-title">Create Account</h2>
+            <p class="text-muted">Join FoodEase to discover premium eateries near you.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('auth.register') }}">
+            <div class="row">
+                <div class="col-md-6 form-group-custom">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control-premium" placeholder="John" required>
+                </div>
+                <div class="col-md-6 form-group-custom">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control-premium" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <div class="form-group-custom">
+                <label>Email Address</label>
+                <input type="email" name="email" class="form-control-premium" placeholder="john@example.com" required autocomplete="email">
+            </div>
+            
+            <div class="form-group-custom">
+                <label>Choose Password</label>
+                <input type="password" name="password" class="form-control-premium" placeholder="••••••••" required autocomplete="new-password">
+            </div>
+
+            <div class="form-group-custom">
+                <label>Account Account Type</label>
+                <select name="role_id" class="form-control-premium form-select" style="background-image: none;" required>
+                    <option value="2" selected>Customer (Order Food)</option>
+                    <option value="3">Restaurant Merchant (Sell Food)</option>
+                    <option value="4">Delivery Partner (Fulfill Orders)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-premium-action mt-3">Register Account</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="color: white">Already registered? <a href="{{ url_for('auth.login') }}" class="text-decoration-none fw-bold" style="color: var(--brand-primary);">Sign In here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

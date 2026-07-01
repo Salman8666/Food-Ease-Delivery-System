@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4" data-aos="fade-up">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold ">Kitchen Operational Control</h2>
+            <p class="color:orange">Manage menus, incoming client streams, and fulfillment pipelines.</p>
+        </div>
+        <button class="btn btn-premium rounded-pill, color: white"><i class="fa-solid fa-plus me-2"></i>Add New Dish</button>
+    </div>
+    
+    <div class="card food-card border-0 p-4">
+        <h5 class="fw-bold mb-3">Live Order Queue</h5>
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Items Summary</th>
+                        <th>Total Yield</th>
+                        <th>Status</th>
+                        <th>Action Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-monospace">#FE-9082</td>
+                        <td>2x Truffle Burger, 1x Crisp Fries</td>
+                        <td class="fw-bold text-dark">$42.50</td>
+                        <td><span class="badge bg-warning text-dark animate-pulse">Pending</span></td>
+                        <td>
+                            <button class="btn btn-success btn-sm rounded-pill px-3 me-2">Accept</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill px-3">Decline</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

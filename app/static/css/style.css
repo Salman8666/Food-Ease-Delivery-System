@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+:root {
+    --brand-primary: #FF5A19;
+    --brand-gradient: linear-gradient(135deg, #FF7A00 0%, #FF3D00 100%);
+    --bg-dark: #0B0F19;
+    --surface-card: #161C2A;
+    --surface-input: #1F2638;
+    --text-white: #FFFFFF;
+    --text-muted: #94A3B8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+}
+.navbar-custom{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#0F1322;
+    z-index:9999;
+    padding:15px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.navbar_brand{
+    display:inline-block;
+    text-decoration:none;
+}
+body {
+     padding-top: 90px;
+    background-color: var(--bg-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-white);
+    min-height: 100vh;
+}
+
+/* Authentication Layout Container */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 460px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.auth-title {
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text; /* 👈 Add this standard line right here */
+    -webkit-text-fill-color: transparent;
+}
+/* Premium Form Elements */
+.form-group-custom {
+    margin-bottom: 20px;
+}
+
+.form-group-custom label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.form-control-premium {
+    width: 100%;
+    background-color: var(--surface-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    color: var(--text-white) !important;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control-premium:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 4px rgba(255, 90, 25, 0.15);
+}
+
+/* Premium Buttons */
+.btn-premium-action {
+    width: 100%;
+    background: var(--brand-gradient);
+    color: var(--text-white);
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 61, 0, 0.3);
+}
+
+.btn-premium-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 61, 0, 0.45);
+}
+
+/* Base Template Structural Fixes */
+.navbar-premium {
+    background-color: #0F1322;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
+}
+.brand-logo-text {
+    font-weight: 800;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 24px;
+}
+.brand-logo-text span {
+    color: var(--brand-primary);
+}
+.fw_bold_text_dark{
+    color: #FFFFFF;
+
+}
+
+.text_muted{
+color: #FF5A19;
+}
+.navbar_brand{
+     font-weight: 800;
+    font-size: 32px;
+  color: #FF7A00;
+}
+.navbar_ease{
+    color: #FFFFFF;
+}
+.login{
+       
+ color: #FFFFFF;   
+}
+.register{
+        font-weight: 600;
+    font-size: 24px;
+   color: #FF7A00;
+}
+
+.nav-link-custom {
+     font-weight: 600;
+    font-size: 24px;
+    color: white;
+  
+    margin-right: 20px;
+}
+.btn-register-nav {
+    
+    background: var(--brand-gradient);
+    color: var(--text-white) !important;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(255, 61, 0, 0.2);
+}
+a {
+    text-decoration: none;
+}
+/* ========================================
+   Cart & Checkout Cards
+======================================== */
+
+.card{
+    border:none;
+    border-radius:16px;
+    transition:.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+.card-body{
+    color:#ffffff;
+}
+/* ========================================
+   Forms
+======================================== */
+
+.form-control,
+.form-select{
+
+    background:#1F2638;
+    color:#ffffff;
+    border:1px solid #2B344A;
+    border-radius:10px;
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    background:#1F2638;
+    color:#ffffff;
+
+    border-color:#FF5A19;
+
+    box-shadow:0 0 10px rgba(255,90,25,.3);
+}
+
+.form-control::placeholder{
+    color:#9aa4b2;
+}
+/* Quantity */
+
+input[type="number"]{
+
+    text-align:center;
+}
+/* ========================================
+   Radio Buttons
+======================================== */
+
+.form-check{
+
+    background:#1F2638;
+    transition:.3s;
+}
+
+.form-check:hover{
+
+    border-color:#FF5A19 !important;
+}
+
+.form-check-input:checked{
+
+    background-color:#FF5A19;
+    border-color:#FF5A19;
+}
+/* ========================================
+   Order Summary
+======================================== */
+
+.sticky-top{
+
+    top:0;
+}
+
+hr{
+
+    border-color:#39445c;
+}
+/* ========================================
+   Buttons
+======================================== */
+
+.btn-warning{
+
+    background:#FF5A19;
+    border:none;
+    color:#fff;
+}
+
+.btn-warning:hover{
+
+    background:#ff6d35;
+}
+
+.btn-outline-light:hover{
+
+    color:#000;
+}
+/* ========================================
+   Food Images
+======================================== */
+
+.food-image{
+
+    height:170px;
+    width:100%;
+    object-fit:cover;
+    border-radius:15px;
+}
+/* ========================================
+   Responsive
+======================================== */
+
+@media(max-width:991px){
+
+    .sticky-top{
+
+        position:relative !important;
+        top:0 !important;
+        margin-top:25px;
+    }
+
+    .card{
+
+        margin-bottom:20px;
+    }
+
+}
+.bg-dark-card{
+    background:#161C2A;
+}
+
+.bg-dark-input{
+    background:#1F2638;
+}
+
+.text-orange{
+    color:#FF5A19;
+}
+.fw-bold mb-4{
+    color: white;
+}
+
+.fw-bold mt-5 mb-4 {
+    color: white;
+}

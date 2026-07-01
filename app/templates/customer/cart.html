@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5" data-aos="fade-up">
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <div>
+            <h2 class="fw-bold text-white">
+                <i class="fa-solid fa-cart-shopping text-warning me-2"></i>
+                My Cart
+            </h2>
+
+            <p class="text-secondary mb-0">
+                Review your delicious order before checkout.
+            </p>
+        </div>
+
+        <a href="{{ url_for('customer.dashboard') }}"
+           class="btn btn-outline-light rounded-pill">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Continue Shopping
+
+        </a>
+
+    </div>
+
+    {% if cart and cart.items %}
+
+    <div class="row">
+
+        <!-- ================= CART ITEMS ================= -->
+
+        <div class="col-lg-8">
+
+            {% for item in cart.items %}
+
+            <div class="card shadow-lg border-0 rounded-4 mb-4"
+                 style="background:#161C2A;">
+
+                <div class="row g-0 align-items-center">
+
+                    <!-- Food Image -->
+
+                    <div class="col-md-3">
+
+                        {% if item.food_item.image_url %}
+
+                        <img src="{{ item.food_item.image_url }}"
+                             class="img-fluid rounded-start-4 food-image"
+                             style="height:170px;width:100%;object-fit:cover;">
+
+                        {% else %}
+
+                        <img src="{{ url_for('static', filename='images/food-placeholder.png') }}"
+                             class="img-fluid rounded-start-4"
+                             style="height:170px;width:100%;object-fit:cover;">
+
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Food Details -->
+
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+
+                            <h4 class="fw-bold text-white">
+                                {{ item.food_item.name }}
+                            </h4>
+
+                            <p class="text-secondary">
+                                {{ item.food_item.description }}
+                            </p>
+
+                            <span class="badge bg-success">
+
+                                {% if item.food_item.is_veg %}
+                                    Veg
+                                {% else %}
+                                    Non-Veg
+                                {% endif %}
+
+                            </span>
+
+                            <h5 class="mt-3 text-warning">
+                                Rs. {{ "%.2f"|format(item.food_item.price) }}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Quantity Controls -->
+
+                    <div class="col-md-3">
+
+                        <div class="p-3">
+
+                            <form action="{{ url_for('customer.update_cart', item_id=item.id) }}"
+                                  method="POST">
+
+                                <label class="form-label text-light">
+                                    Quantity
+                                </label>
+
+                                <input type="number"
+                                       name="quantity"
+                                       value="{{ item.quantity }}"
+                                       min="1"
+                                       max="20"
+                                       class="form-control mb-3">
+
+                                <button class="btn btn-warning w-100">
+                                    <i class="fa-solid fa-rotate me-2"></i>
+                                    Update
+                                </button>
+
+                            </form>
+
+                            <form action="{{ url_for('customer.remove_from_cart', item_id=item.id) }}"
+                                  method="POST"
+                                  class="mt-2">
+
+                                <button class="btn btn-outline-danger w-100">
+                                    <i class="fa-solid fa-trash me-2"></i>
+                                    Remove
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Order Summary starts here -->
+
+
+        <!-- ================= ORDER SUMMARY ================= -->
+
+<div class="col-lg-4">
+
+    <div class="card shadow-lg border-0 rounded-4 sticky-top"
+         style="background:#161C2A; top:100px;">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-white mb-4">
+
+                <i class="fa-solid fa-receipt text-warning me-2"></i>
+
+                Order Summary
+
+            </h4>
+
+            <!-- Subtotal -->
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span class="text-secondary">
+
+                    Subtotal
+
+                </span>
+
+                <strong class="text-white">
+
+                    Rs. {{ "%.2f"|format(total) }}
+
+                </strong>
+
+            </div>
+
+            <!-- Delivery Fee -->
+
+            {% set delivery_fee = 150 %}
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span class="text-secondary">
+
+                    Delivery Fee
+
+                </span>
+
+                <strong class="text-white">
+
+                    Rs. {{ "%.2f"|format(delivery_fee) }}
+
+                </strong>
+
+            </div>
+
+            <!-- Tax -->
+
+            {% set tax = total * 0.05 %}
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span class="text-secondary">
+
+                    Tax (5%)
+
+                </span>
+
+                <strong class="text-white">
+
+                    Rs. {{ "%.2f"|format(tax) }}
+
+                </strong>
+
+            </div>
+
+            <hr class="border-secondary">
+
+            <!-- Grand Total -->
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h5 class="text-white fw-bold">
+
+                    Grand Total
+
+                </h5>
+
+                <h5 class="text-warning fw-bold">
+
+                    Rs. {{ "%.2f"|format(total + delivery_fee + tax) }}
+
+                </h5>
+
+            </div>
+
+            <!-- Promo Code -->
+
+            <label class="form-label text-light">
+
+                Promo Code
+
+            </label>
+
+            <div class="input-group mb-4">
+
+                <input type="text"
+                       class="form-control"
+                       placeholder="Enter coupon code"
+                       style="
+                            background:#1F2638;
+                            color:white;
+                            border:none;
+                       ">
+
+                <button class="btn btn-warning">
+
+                    Apply
+
+                </button>
+
+            </div>
+
+            <!-- Checkout -->
+
+            <a href="{{ url_for('customer.checkout') }}"
+               class="btn btn-warning w-100 rounded-pill py-3 fw-bold">
+
+                <i class="fa-solid fa-credit-card me-2"></i>
+
+                Proceed to Checkout
+
+            </a>
+
+            <!-- Security -->
+
+            <div class="text-center mt-4">
+
+                <small class="text-secondary">
+
+                    <i class="fa-solid fa-lock me-1"></i>
+
+                    Secure SSL Encrypted Checkout
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% else %}
+
+<div class="card shadow-lg border-0 rounded-4 text-center p-5"
+     style="background:#161C2A;">
+
+    <i class="fa-solid fa-cart-shopping fa-5x text-secondary mb-4"></i>
+
+    <h3 class="text-white">
+        Your Cart is Empty
+    </h3>
+
+    <p class="text-secondary">
+        Looks like you haven't added any delicious meals yet.
+    </p>
+
+    <a href="{{ url_for('customer.dashboard') }}"
+       class="btn btn-warning rounded-pill px-5 mt-3">
+
+        Browse Restaurants
+
+    </a>
+
+</div>
+
+{% endif %}
+
+</div>   <!-- End container -->
+
+{% endblock %}
